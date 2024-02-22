@@ -1,14 +1,14 @@
-export type paymentOptions = 'card' | 'cash';
-export type categoryOptions = 'софт-скил' | 'другое' | 'дополнительно' | 'кнопка' | 'хард-скил';
+export type PaymentOptions = 'card' | 'cash';
+export type CategoryOptions = 'софт-скил' | 'другое' | 'дополнительно' | 'кнопка' | 'хард-скил';
 
 export interface IProduct {
 	id: string;
   title: string;
 	description: string;
 	image: string;
-	category: categoryOptions;
-	price: number;
-  isAddedToBasket: boolean;
+	category: CategoryOptions;
+	price: number | null;
+  isAddedToBasket?: boolean;
 }
 
 export interface ICatalogEventData{
@@ -16,10 +16,10 @@ export interface ICatalogEventData{
 }
 
 export interface IBasketEventData{
-  basket: IProductBasket[];
+  basket: ProductBasket[];
 }
 
-export type IProductBasket = Pick<IProduct, 'id' | 'title' | 'price'>;
+export type ProductBasket = Pick<IProduct, 'id' | 'title' | 'price'>;
 
 
 export interface IOrderContact {
@@ -29,7 +29,7 @@ export interface IOrderContact {
 
 export interface IOrderDelivery{
   address: string;
-  payment: paymentOptions;
+  payment: PaymentOptions;
 }
 
 export interface IOrder extends IOrderContact, IOrderDelivery {

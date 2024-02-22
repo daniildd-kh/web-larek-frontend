@@ -1,6 +1,6 @@
 
 import { Form } from "./common/Form";
-import { IOrderContact, IOrderDelivery,paymentOptions } from "../types";
+import { IOrderContact, IOrderDelivery, PaymentOptions } from "../types";
 import { IEvents } from "./base/events";
 
 
@@ -13,7 +13,7 @@ class OrderDeliveryUI extends Form<IOrderDelivery>{
   set address(value:string){
 
   }
-  set payment(method:paymentOptions){
+  set payment(method:PaymentOptions){
 
   }
 

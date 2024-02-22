@@ -1,4 +1,4 @@
-import { IProductBasket } from "../types";
+import { ProductBasket } from "../types";
 import { ensureElement } from "../utils/utils";
 import { View } from "./base/View";
 import { IEvents } from "./base/events";

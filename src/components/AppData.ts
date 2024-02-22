@@ -1,7 +1,7 @@
 import {
 	IProduct,
-	IProductBasket,
-	paymentOptions,
+	ProductBasket,
+	PaymentOptions,
 	IOrder,
 
 } from '../types';
@@ -15,8 +15,8 @@ export class Product extends Model<IProduct> {
 	}
 }
 
-export class Basket extends Model<IProductBasket[]> {
-	protected productList: IProductBasket[] = [];
+export class Basket extends Model<ProductBasket[]> {
+	protected productList: ProductBasket[] = [];
 
 	constructor(events: IEvents) {
     super([], events);
@@ -59,7 +59,7 @@ class Order extends Model<IOrder> {
 	phone: string = '';
 	email: string = '';
 	address: string = '';
-  payment: paymentOptions = 'card';
+  payment: PaymentOptions = 'card';
 	total: number = 0;
 	items: string[] = [];
 

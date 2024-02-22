@@ -1,5 +1,5 @@
 import { View } from "./base/View";
-import { IProduct, categoryOptions } from "../types";
+import { IProduct, CategoryOptions } from "../types";
 import { ensureElement } from "../utils/utils";
 
 interface IAction{
@@ -47,7 +47,7 @@ export class CardUI extends View<IProduct>{
   set image(src:string){
 
   }
-  set category(category:categoryOptions){
+  set category(category:CategoryOptions){
 
   }
   set description(value:string){
