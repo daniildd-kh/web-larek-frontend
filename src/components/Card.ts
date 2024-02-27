@@ -55,6 +55,7 @@ export class CardUI extends View<IProduct> {
 			this.setText(this.priceElement, `${value} синапсов`);
 		} else {
 			this.setText(this.priceElement, 'Бесценно');
+			this.setDisabled(this.buttonElement, true);
 		}
 	}
 	set image(src: string) {

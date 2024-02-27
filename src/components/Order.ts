@@ -1,6 +1,7 @@
 import { Form } from './common/Form';
 import { IOrderContact, IOrderDelivery, PaymentOptions } from '../types';
 import { IEvents } from './base/events';
+import { ensureAllElements } from '../utils/utils';
 
 export class OrderDeliveryUI extends Form<IOrderDelivery> {
 	paymentButtons: HTMLButtonElement[];
@@ -9,8 +10,11 @@ export class OrderDeliveryUI extends Form<IOrderDelivery> {
 		this._submit.addEventListener('click', () => {
 			this.events.emit('order.delivery:next');
 		});
-		const paymentButtons = container.querySelectorAll('.order__buttons button');
-		paymentButtons.forEach((button) => {
+		this.paymentButtons = ensureAllElements(
+			'.order__buttons button',
+			container
+		);
+		this.paymentButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				this.resetButtonStatus();
 				button.classList.add('button_alt-active');

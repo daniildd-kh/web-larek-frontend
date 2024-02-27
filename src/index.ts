@@ -4,12 +4,7 @@ import './scss/styles.scss';
 import { API_URL, CDN_URL } from './utils/constants';
 import { ProductApi } from './components/ProductApi';
 import { Catalog, Basket, Order } from './components/AppData';
-import {
-	ICatalogEventData,
-	IProduct,
-	IOrder,
-	IOrderForm,
-} from './types';
+import { ICatalogEventData, IProduct, IOrderForm } from './types';
 import { Modal } from './components/common/Modal';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { PageUI } from './components/Page';
@@ -52,20 +47,20 @@ const successUI = new SuccessUI(cloneTemplate(successTemplate), {
 	onClick: () => modal.close(),
 });
 
-const getProductsApi = () => api
-	.getProductList()
-	.then((data) => {
-		catalog.setCatalog(data);
-	})
-	.catch((error) => {
-		console.log(error);
-	});
+const getProductsApi = () =>
+	api
+		.getProductList()
+		.then((data) => {
+			catalog.setCatalog(data);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 
 getProductsApi();
 
 // Каталог обновлен
 eventEmmiter.on('catalog:updated', (data: ICatalogEventData) => {
-
 	const catalog = data.catalog.map((product) => {
 		const catalogCard = new CardUI('card', cloneTemplate(cardCatalogTemplate), {
 			onClick: () => eventEmmiter.emit('product:open', product),
@@ -163,7 +158,7 @@ eventEmmiter.on('order:open', () => {
 			errors: [],
 		}),
 	};
-  orderDeliveryUI.resetButtonStatus();
+	orderDeliveryUI.resetButtonStatus();
 	modal.render(orderDeliveryRender);
 	// Оформление заказа
 });
@@ -175,10 +170,6 @@ eventEmmiter.on(
 	}
 );
 
-eventEmmiter.on('order.delivery:ready', (event: IOrder) => {
-	// Перейти в раздел контактной информации
-});
-
 // Ошибки в форме
 eventEmmiter.on('formErrors:change:delivery', (errors: Partial<IOrderForm>) => {
 	const { address, payment } = errors;
@@ -188,9 +179,6 @@ eventEmmiter.on('formErrors:change:delivery', (errors: Partial<IOrderForm>) => {
 		.join('; ');
 });
 
-// Заказ готов к оформлению
-eventEmmiter.on('order.contacts:ready', (event: IOrder) => {
-});
 
 eventEmmiter.on('order.delivery:next', () => {
 	const orderContactFormRender = {
@@ -216,7 +204,6 @@ eventEmmiter.on('formErrors:change:contacts', (errors: Partial<IOrderForm>) => {
 eventEmmiter.on(
 	'order.contacts:change',
 	(data: { field: keyof IOrderForm; value: IOrderForm[keyof IOrderForm] }) => {
-
 		order.setContactsField(data.field, data.value);
 	}
 );
@@ -242,9 +229,8 @@ eventEmmiter.on('order.contacts:next', () => {
 				}),
 			};
 			modal.render(successRender);
-      page.busketNumber = 0;
-      getProductsApi();
-
+			page.busketNumber = 0;
+			getProductsApi();
 		})
 		.catch((error) => {
 			console.log(error);

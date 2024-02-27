@@ -1,4 +1,3 @@
-import { ProductBasket } from '../types';
 import { createElement, ensureElement } from '../utils/utils';
 import { View } from './base/View';
 import { IEvents } from './base/events';
